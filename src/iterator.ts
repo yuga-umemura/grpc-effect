@@ -3,15 +3,25 @@
  * .next()メソッドをもつ
  * .next()を実行すると、イテレータリザルトを返す
  */
-const iterator: Iterator<number, void, undefined> = {
-  next() {
-    const iteratorResult: IteratorResult<number, void> = {
-      value: 42,
-      done: false,
-    };
-    return iteratorResult;
-  },
-};
+const iterator: Iterator<number, void, undefined> = (() => {
+  let current = 0;
+  const limit = 5;
+
+  return {
+    next() {
+      if (current < limit) {
+        return {
+          value: current++,
+          done: false,
+        };
+      }
+      return {
+        value: undefined,
+        done: true,
+      };
+    },
+  };
+})();
 
 /**
  * イテラブルなオブジェクト
@@ -23,7 +33,12 @@ const obj: Iterable<number> = {
   },
 };
 
-for (const v of obj) {
-  console.log(v);
-  break;
+let result = obj[Symbol.iterator]().next();
+while (!result.done) {
+  console.log(result.value);
+  result = iterator.next();
 }
+
+// for (const v of obj) {
+//   console.log(v);
+// }
