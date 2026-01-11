@@ -1,0 +1,22 @@
+{
+  "name": "grpc-effect",
+  "version": "1.0.0",
+  "scripts": {
+    "run:client": "tsx ./src/client.ts",
+    "run:server": "tsx ./src/server.ts",
+    "gen:proto": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./src/gen --ts_proto_opt=esModuleInterop=true,outputServices=grpc-js --proto_path=./proto ./proto/hello.proto"
+  },
+  "packageManager": "pnpm@10.26.2",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.3",
+    "@grpc/proto-loader": "^0.8.0",
+    "effect": "^3.19.14",
+    "pino": "^10.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.6",
+    "ts-proto": "^2.10.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
